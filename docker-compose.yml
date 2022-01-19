@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+    postgres:
+        build:
+            context: ./postgres
+            dockerfile: Dockerfile
+        restart: always
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: pweb_photo
+        ports:
+            - "2345:5432"
+        volumes:
+            - ../volumes/postgres/database:/var/lib/postgresql/data
+    mysql:
+        build:
+            context: ./mysql
+            dockerfile: Dockerfile
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+            MYSQL_DATABASE: pweb_photo
+        ports:
+            - "2347:3306"
+        volumes:
+            - ../volumes/mysql/database:/var/lib/mysql
